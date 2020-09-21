@@ -11,6 +11,13 @@ The main theorem has been tested and type checks successfully with the following
 - Agda version 2.5.4.2
 - [HoTT-Agda commit 7e62770](https://github.com/HoTT/HoTT-Agda/tree/7e62770e9f2a8df4053f8936de369b9554668dcf)
 
+The files are arrange as follows:
+- `main/NielsenSchreier.agda` Contains proof of the main theorem
+- `main/Coequalizers/` Definition of coequalizers and some useful lemmas
+- `main/Graphs/` Definition of graphs, trees and connected graphs, construction of spanning trees for graphs with finitely many vertices
+- `main/Groups/` Type theoretic definition of group and free group
+- `main/Util/` Some general miscellaneous lemmas that I couldn't find in the HoTT-Agda library
+
 ## Demonstration of Cubical Mode
 
 Some of the lemmas on coequalizers have shorter proofs using Agda cubical mode. The file `cubical/Coequalizers.agda` has been added to demonstrate this. Since this file uses cubical mode, it *only* works on the most recent versions of Agda. It has been tested and type checks successfully on the following setup (but likely will continue to work on more recent versions):
