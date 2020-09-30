@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --exact-split --rewriting #-}
+{-# OPTIONS --without-K --exact-split --rewriting --overlapping-instances #-}
 
 open import lib.Basics
 open import lib.NConnected
@@ -60,7 +60,7 @@ module SubGroupsOfFreeGroups (A : Type i) (X : ∥ ⊤ / A ∥₁ → Type i)
   to-free-gpd : Σ ∥ ⊤ / A ∥₁ X ≃ ∥ X base / (A × X base) ∥₁
   to-free-gpd =
       Σ ∥ ⊤ / A ∥₁ X
-        ≃⟨ Σ-emap-r (Trunc-elim ⦃ λ z → ≃-level (raise-level _ Xset) (raise-level _ (Xset' z)) ⦄ λ z → ide _) ⟩
+        ≃⟨ Σ-emap-r (Trunc-elim λ z → ide _) ⟩
       Σ ∥ ⊤ / A ∥₁ X'
         ≃⟨ TruncRecType.flattening-Trunc _ ⟩
       ∥ Σ (⊤ / A) (X ∘ [_]) ∥₁
@@ -68,8 +68,14 @@ module SubGroupsOfFreeGroups (A : Type i) (X : ∥ ⊤ / A ∥₁ → Type i)
       ∥ X base / (A × X base) ∥₁
         ≃∎
       where
-        X' = fst ∘ Trunc-rec (λ z → ((X [ z ]) , Xset))
-        Xset' = snd ∘ Trunc-rec (λ z → ((X [ z ]) , Xset))
+        X'-set : ∥ ⊤ / A ∥₁ → hSet i
+        X'-set = Trunc-rec (λ z → ((X [ z ]) , Xset))
+
+        X' = fst ∘ X'-set
+
+        instance
+          X-≃-gpd : {z : ∥ ⊤ / A ∥₁} → is-gpd (X z ≃ X' z)
+          X-≃-gpd {z} = raise-level 0 (≃-level Xset (snd (X'-set z)))
 
 
 {- A free groupoid with vertex set a definitionally finite set is merely equivalent

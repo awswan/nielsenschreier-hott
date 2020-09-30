@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K #-}
+{-# OPTIONS --without-K --overlapping-instances #-}
 
 open import lib.Basics
 open import lib.types.Coproduct

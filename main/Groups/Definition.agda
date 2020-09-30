@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --exact-split --rewriting #-}
+{-# OPTIONS --without-K --exact-split --rewriting --overlapping-instances #-}
 
 open import lib.Basics
 open import lib.NConnected
